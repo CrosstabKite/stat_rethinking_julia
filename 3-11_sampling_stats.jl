@@ -35,8 +35,14 @@ central_interval(samples, 0.5)
 
 
 # Code block 3.13
+
+# UPDATE: all the prob. prog. packages have it right. Because they *sort* the samples
+# first, they're really working with the ECDF. Subtracting in the domain of the ECDF
+# such that the range always has at least `proba` mass.
+
 # - I'm 85% sure the StatisticalRethinking.jl package has this wrong, it assumes
 #   some mass on both sides of the tail, which is not correct.
+
 function high_density_interval(samples, proba::AbstractFloat)
     @assert proba >= 0
     @assert proba <= 1
